@@ -33,8 +33,9 @@ public class BookingsServiceImpl implements BookingsService{
          Long uid=userServiceImpl.getCurrentUserId();
          String bookName=bookRepo.searchNameOfBookById(id);
          String username=userServiceImpl.getCurrentUserName();
-         Bookings bookings1=new Bookings(bookings.getBookingId(),id,bookName,uid,username,localDateTime);
-//         bookingsRepo.save(bookings1);
+         String phoneNumber=userServiceImpl.getCurrentPhoneNumber();
+         Bookings bookings1=new Bookings(bookings.getBookingId(),id,bookName,uid,username,phoneNumber,localDateTime);
+//       bookingsRepo.save(bookings1);
          log.info("Booking has been Created "+bookingsRepo.save(bookings1));
     }
 

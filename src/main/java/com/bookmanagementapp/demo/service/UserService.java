@@ -6,6 +6,7 @@ public interface UserService {
     User registerUser(User user);
       Long getCurrentUserId();
       String getCurrentUserName();
+      String getCurrentPhoneNumber();
 //      void createRoleUser(User user);
 }
 

@@ -29,6 +29,8 @@ public class Bookings {
 
     private String userName;
 
+    private String phoneNumber;
+
     private LocalDateTime date;
 
 

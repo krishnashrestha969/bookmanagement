@@ -109,4 +109,28 @@ HttpServletRequest request;
         return uname;
 
     }
+
+    @Override
+    public String getCurrentPhoneNumber() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String uname="";
+        if (principal instanceof UserDetails) {
+            uname = ((UserDetails)principal).getUsername();
+        } else {
+            uname = principal.toString();
+        }
+        Configuration configuration = new Configuration().configure("./hibernate.cfg.xml");
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+
+        Session session = sessionFactory.openSession();
+        String sql = "SELECT mobile_number from users where username=:name ";
+        SQLQuery query = session.createSQLQuery(sql);
+//        NativeQuery<User> query = session.createSQLQuery(sql);
+//        query.addEntity(User.class);
+        query.setParameter("name",uname);
+        String s=query.getSingleResult().toString();
+           session.close();
+        log.info("User phonenumber returned of current username "+uname);
+        return  s;
+    }
 }
